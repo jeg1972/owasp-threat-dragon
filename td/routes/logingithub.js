@@ -10,7 +10,7 @@ passport.use(new Strategy({
     callbackURL: '/oauth/github'
   },
   function(accessToken, refreshToken, profile, done) {
-    return done(null, profile);
+    return done(null, {profile: profile, accessToken: accessToken});
   }));
 
 passport.serializeUser(function(user, done) {
@@ -34,7 +34,7 @@ router.get('/oauth/github',
 router.get('/profile',
   require('connect-ensure-login').ensureLoggedIn('/login/github'),
   function(req, res){
-    res.render('profile', { user: req.user });
+    res.json(req.user);
   });
 
 module.exports = router;

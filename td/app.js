@@ -48,9 +48,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 var index = require('./routes/index');
 var logingithub = require('./routes/logingithub');
+var api = require('./routes/api');
 
 app.use('/', index);
 app.use('/', logingithub);
+app.use('/api', api);
 
 //// catch 404 and forward to error handler
 //app.use(function (req, res, next) {

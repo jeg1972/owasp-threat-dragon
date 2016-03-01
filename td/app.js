@@ -1,13 +1,19 @@
 ﻿var express = require('express');
+var session = require('express-session');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var helmet = require('helmet');
-var routes = require('./routes/index');
+var passport = require('passport');
 
 var app = express();
+
+//sessions
+app.use(session({ secret: process.env.SESSION_SIGNING_KEY, resave: false, saveUninitialized: false }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 //security headers
 app.set('x-powered-by', false)
@@ -29,17 +35,22 @@ app.use(helmet.csp({
   reportUri: 'https://report-uri.io/report/owaspthreatdragon'
 }));
 
-
 // uncomment after placing your favicon in /public
-app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+//routes
+app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
+var index = require('./routes/index');
+var logingithub = require('./routes/logingithub');
+
+app.use('/', index);
+app.use('/', logingithub);
 
 //// catch 404 and forward to error handler
 //app.use(function (req, res, next) {

@@ -15,9 +15,9 @@
         'xeditable'
     ]);
 
-    app.run(['$rootScope', 'common',
-    function ($rootScope, common) {
-
+    app.run(['$rootScope', '$location',
+    function ($rootScope, $location) {
+        $rootScope.location = $location;
     }]);
 
     // Handle routing errors and success events

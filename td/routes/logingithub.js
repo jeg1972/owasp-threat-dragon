@@ -28,6 +28,15 @@ router.get('/login',
 function(req, res) { 
     referer = req.query.loc ?  '/#' + req.query.loc : '/#/';
     res.redirect('/login/github');
+    });
+
+router.get('/logout',
+function(req, res) {
+    req.logOut();
+    //logout does not seem to do much/anything so do it by hand
+    res.clearCookie('connect.sid');
+    req.session.destroy(function() { res.redirect('/'); 
+        });
     }); 
 
 router.get('/login/github', passport.authenticate('github'));  

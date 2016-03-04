@@ -7,13 +7,15 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var helmet = require('helmet');
 var passport = require('passport');
+var AzureTablesStore = require('connect-azuretables')(session);
 
 var app = express();
+app.use(express.static(path.join(__dirname, 'public')));
 
 //sessions
-app.use(session({ secret: process.env.SESSION_SIGNING_KEY, resave: false, saveUninitialized: false }));
+app.use(session({ store: new AzureTablesStore(), secret: process.env.SESSION_SIGNING_KEY, resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
-app.use(passport.session());
+//app.use(session({ store: new AzureTablesStore()}));
 
 //security headers
 app.set('x-powered-by', false)
@@ -44,7 +46,6 @@ app.use(cookieParser());
 //routes
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'public')));
 
 var index = require('./routes/index');
 var logingithub = require('./routes/logingithub');

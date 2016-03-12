@@ -17,24 +17,24 @@
         <!-- Navigation starts -->
         <div class="navbar-collapse collapse" id="navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-               <li>
+               <li ng-if="!vm.isLoggedIn">
                     <a class="navbar-link" href="login?loc={{location.path()}}">
-                        <span class="glyphicon glyphicon-log-in fa-2x icon-align"></span>
+                        <i class="fa fa-sign-in fa-2x icon-align fa-fw"></i> <span class="h4">Sign in</span>
                     </a>
                 </li>
-                <li>
+                <li ng-if="vm.isLoggedIn">
                     <a class="navbar-link" href="logout">
-                        <span class="glyphicon glyphicon-log-out fa-2x icon-align"></span>
+                        <i class="fa fa-sign-out fa-2x icon-align fa-fw"></i> <span class="h4">Sign out</span>
                     </a>         
                 </li>
                 <li>
                     <a class="navbar-link" href="http://docs.threatdragon.org/" target="_blank">
-                        <span class="fa fa-question-circle fa-2x icon-align"></span>
+                        <i class="fa fa-question-circle fa-2x icon-align fa-fw"></i> <span class="h4">Get some help</span>
                     </a>
                 </li>
                 <li>
                     <a class="navbar-link" href="https://github.com/mike-goodwin/owasp-threat-dragon" target="_blank">
-                        <span class="fa fa-github fa-2x icon-align"></span>
+                        <i class="fa fa-github fa-2x icon-align fa-fw"></i> <span class="h4">Visit us on GitHub</span>
                     </a>
                 </li>
                 <li>

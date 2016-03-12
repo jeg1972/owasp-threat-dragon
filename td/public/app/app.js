@@ -12,7 +12,8 @@
         'ui.bootstrap',
         'ngRoute',
         'common',
-        'xeditable'
+        'xeditable',
+        'ngCookies'
     ]);
 
     app.run(['$rootScope', '$location',

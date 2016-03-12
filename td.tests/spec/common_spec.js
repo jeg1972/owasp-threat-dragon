@@ -11,7 +11,7 @@ describe('common service', function () {
         mockCommonConfig = {};
         mockLogger = {};
 
-        angular.mock.module('app')
+        angular.module('app', ['ngMock']);
 
         angular.mock.module(function ($provide) {
             $provide.value('commonConfig', mockCommonConfig);

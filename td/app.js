@@ -13,9 +13,8 @@ var app = express();
 app.use(express.static(path.join(__dirname, 'public')));
 
 //sessions
-app.use(session({ store: new AzureTablesStore(), secret: process.env.SESSION_SIGNING_KEY, resave: false, saveUninitialized: false }));
+app.use(session({ store: new AzureTablesStore(), secret: process.env.SESSION_SIGNING_KEY, resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
-//app.use(session({ store: new AzureTablesStore()}));
 
 //security headers
 app.set('x-powered-by', false)
@@ -37,7 +36,6 @@ app.use(helmet.csp({
   reportUri: 'https://report-uri.io/report/owaspthreatdragon'
 }));
 
-// uncomment after placing your favicon in /public
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

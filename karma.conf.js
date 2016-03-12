@@ -15,6 +15,7 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
         'td/public/libs/angular/angular.js',
+        'td/public/libs/angular-cookies/angular-cookies.js',
         'td/public/libs/angular-route/angular-route.js',
         'td/public/libs/nools/nools.js',
         'td/public/libs/jquery/jquery.js',
